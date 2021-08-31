@@ -5,13 +5,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.masai.recyclerviewfirstassgn.Adapters.Adapter;
 import com.masai.recyclerviewfirstassgn.Models.Model1;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements itemClickListener {
     private RecyclerView mrvRecyclerView;
     ArrayList<Model1> articleList ;
 
@@ -34,10 +35,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setRecyclerViewAdapter(){
-        Adapter adapter= new Adapter(articleList,this);
+        Adapter adapter= new Adapter(this,articleList,this);
         LinearLayoutManager linearLayoutManager =new LinearLayoutManager(this);
         mrvRecyclerView.setLayoutManager(linearLayoutManager);
         mrvRecyclerView.setAdapter(adapter);
+
+    }
+
+    @Override
+    public void onItemClicked(int position, Model1 model1) {
+        Toast.makeText(MainActivity.this,"item clicked at "+position+" "+model1.getTitle(),Toast.LENGTH_SHORT).show();
 
     }
 }
